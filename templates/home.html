@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="d-flex flex-wrap align-items-center border border-secondary rounded shadow-sm p-3 bg-light">
+
+
+    <div class="col-12 col-md-6 order-2 order-md-1 text-center text-md-start">
+        <div class="text-center m-4">
+            <h1 style="color: #18b5a2; font-weight: bold; text-decoration: underline;">
+                <i>Welcome to BookCrest 📚✨</i>
+            </h1>
+        </div>
+        <div class="text-center m-3">
+            <p style="line-height: 1.6; font-size: 1.1rem; color: #555;">
+                At <b>BookCrest</b>, we offer a platform where you can explore, buy,<br>
+                and manage your favorite books with ease. Whether you're looking<br>
+                for the latest releases, detailed book descriptions, or a seamless<br>
+                way to purchase, <b>BookCrest</b> has everything you need to enhance your reading experience.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="col-12 col-md-6 order-1 order-md-2 p-4">
+        <img class="img-fluid rounded shadow-lg w-100 px-3" src="{% static 'book_img.jpg' %}" alt="BookCrest Image">
+    </div>
+
+</div>
+
+
+<!-- ---------------------------------- -->
+
+<div class="py-4" style="background: linear-gradient(to right, #1d3557, #457b9d);">
+    <div class="d-flex flex-wrap gap-3 justify-content-center text-center">
+        <a class="btn btn-info fw-bold px-4 py-2 shadow-lg text-uppercase" href="{% url 'all_categories' %}">All</a>
+
+        {% for i in category %}
+        <a class="btn btn-outline-light text-uppercase fw-semibold px-3 py-2 border-2 shadow-sm"
+            style="border-radius: 25px; transition: all 0.3s ease;"
+            href="{% url 'category_wise' i.slug %}">{{i.category}}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- ---------------------------------- -->
+{% if data %}
+<div class="text-center my-4">
+    <h4 class="total-result-title text-white p-3 rounded shadow-lg">
+        Explore Our Collection: <span class="text-primary">{{ data|length }}</span>
+    </h4>
+</div>
+
+<div class="d-flex flex-wrap gap-3 m-md-4 justify-content-center">
+    {% for i in data %}
+    <div class="card col-sm-12 col-md-3 m-2 mt-4 border border-secondary shadow-lg"
+        style="border-radius: 10px; overflow: hidden;">
+        <img src="{{ i.img.url }}" class="card-img-top h-50" alt="Book Image" style="border-bottom: 1px solid #ccc;">
+        <div class="card-body">
+            <h5 class="card-title text-center"><b>Name :</b> {{i.name}}</h5>
+            <h5 class="card-title text-center"><b>Category :</b> {{ i.category.category }}</h5>
+            <strong>
+                <hr>
+            </strong>
+            <h5 class="card-title text-center"><b>${{i.price}}</b></h5>
+            <strong>
+                <hr>
+            </strong>
+            <div class="text-center">
+                <a class="btn btn-dark" href="{% url 'all_details' i.id %}">Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+<p class="text-center w-100 text-muted mt-5 fs-3">No products yet.</p>
+{% endif %}
+<!-- ---------------------------------- -->
+
+{% endblock content %}

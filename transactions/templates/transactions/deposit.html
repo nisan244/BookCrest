@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="text-center mt-4 mb-4">Deposit Money</h1>
+<div class="container" style="width: 500px; margin: auto;">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+
+        <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-info px-3 py-2" type="submit">Deposit</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
