@@ -23,7 +23,7 @@
 
 <!-- ---------------------------------- -->
 
-<div class="d-flex justify-content-center mb-5">
+<div class="d-flex justify-content-center mb-5 px-2">
     <div class="card shadow-lg rounded-lg" style="width: 450px; background-color: #f0f8f7;">
         <div class="card-body p-4">
             <h5><b>Name: </b>{{ user.first_name }} {{ user.last_name }}</h5>
@@ -46,11 +46,9 @@
 
 <!-- ---------------------------------- -->
 
-<!-- Add this div around the table to make it responsive -->
 {% if purchases %}
-
-<div class="table-responsive px-5 w-75 m-auto">
-    <table class="table table-striped table-bordered shadow-sm bg-white" style="max-width: 100%; overflow-x: auto;">
+<div class="table-responsive w-75 m-auto">
+    <table class="table-responsive table-striped table-bordered shadow-sm bg-white" style="max-width: 100%; overflow-x: auto; margin: auto;">
         <thead class="table-dark">
             <tr class="fs-5">
                 <th class="text-start py-3 px-4 text-center">ID</th>

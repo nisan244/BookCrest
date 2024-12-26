@@ -5,26 +5,28 @@
 
 <!-- ---------------------------------- -->
 
-<div class="d-flex flex-wrap px-4 pt-4 align-items-center">
-    <div class="d-flex col-md-6 p-3">
-        <img src="{{ data.img.url }}" alt="{{data.name}}" class="w-75 img-fluid">
-    </div>
-    <div class="col-md-6 p-3">
-        <div class="card-body">
-            <h1 class="card-title mb-3"><b>{{data.name}}</b></h1>
-            <h3 class="card-title"><b>Category:</b> {{data.category}}</h3><br>
-            <h4 class="card-title"><b>${{data.price}}</b></h4><br>
-            <h4 class="card-title"><b>Quantity :</b> {{data.quantity}}</h4><br>
-            <h4><b>Description : </b><span class="fs-5">{{data.Description}}</span></h4>
-            <hr>
-            {% if request.user.is_authenticated %}
-            <div class="d-flex align-items-center">
-                <form action="{% url 'Buy_book' data.id %}" method="post">
-                    {% csrf_token %}
-                    <button class="btn btn-warning mt-3" type="submit"><strong>Buy Now</strong></button>
-                </form>
+<div class="container my-4">
+    <div class="row g-4 align-items-center">
+        <div class="col-12 col-md-6 text-center">
+            <img src="{{ data.img.url }}" alt="{{ data.name }}" class="img-fluid w-75">
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card-body">
+                <h1 class="card-title mb-3"><b>{{ data.name }}</b></h1>
+                <h3 class="card-title"><b>Category:</b> {{ data.category }}</h3><br>
+                <h4 class="card-title"><b>${{ data.price }}</b></h4><br>
+                <h4 class="card-title"><b>Quantity:</b> {{ data.quantity }}</h4><br>
+                <h4><b>Description:</b> <span class="fs-5">{{ data.Description }}</span></h4>
+                <hr>
+                {% if request.user.is_authenticated %}
+                <div class="d-flex align-items-center">
+                    <form action="{% url 'Buy_book' data.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-warning mt-3" type="submit"><strong>Buy Now</strong></button>
+                    </form>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
 </div>
@@ -32,13 +34,16 @@
 <!-- ---------------------------------- -->
 
 <div class="card m-4 p-3 mt-4">
-    <h4 class="p-3 bg-dark text-light"><b>Total Comment :</b> {{comments | length}}</h4>
+    <h4 class="p-3 bg-dark text-light"><b>Total Comments:</b> {{ comments | length }}</h4>
     <hr>
     <div class="card-body">
         {% for comment in comments %}
         <div class="border border-3 rounded p-3 m-2 bg-dark text-light">
-            <p class="d-flex gap-4"><b>✨ {{comment.name}} </b> <small> {{comment.time}}</small></p>
-            <h5>{{comment.body}}</h5>
+            <p class="d-flex justify-content-between">
+                <b>✨ {{ comment.name }}</b>
+                <small>{{ comment.time }}</small>
+            </p>
+            <h5>{{ comment.body }}</h5>
         </div>
         {% endfor %}
     </div>
@@ -46,15 +51,15 @@
 
 <!-- ---------------------------------- -->
 
-<div style="width: 490px; min-height: 70vh;" class="card m-auto p-3 mt-3 mb-4 bg-dark text-light">
-    <div class="card-body" style="width: 400px;">
-        <form action="" method="post" style="width: 420px;">
+<div class="container">
+    <div class="card bg-dark text-light p-4">
+        <h4 class="mb-4">Leave a Comment</h4>
+        <form action="" method="post">
             {% csrf_token %}
-            {{comment_form | crispy}}
+            {{ comment_form | crispy }}
 
             <div class="d-flex justify-content-center mt-4">
-                <button class="btn btn-success" type="submit">Submit</button>
-
+                <button class="btn btn-success px-4 py-2" type="submit">Submit</button>
             </div>
         </form>
     </div>
